@@ -11,7 +11,7 @@ namespace Calendar.ApiService
         {
             return new User
             {
-                Id = 1,
+                Id = userId,
                 DisplayName = "Jane Doe",
                 Account = new Account
                 {
