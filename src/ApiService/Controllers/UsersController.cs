@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Calendar.ApiService
 {
     [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    [Route("api/v1/users")]
+    public class UsersV1Controller : ControllerBase
     {
         [HttpGet("{id}")]
         public User GetUser(int id)
