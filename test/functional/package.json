@@ -1,0 +1,15 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "description": "Automated tests for the Calendar API",
+  "main": "calendar-api.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Brian Cristante",
+  "private": true,
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
