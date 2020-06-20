@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Calendar.ApiService
 {
     [ApiController]
-    [Route("[controller]/{eventId}")]
-    public class EventsController : ControllerBase
+    [Route("api/v1/events")]
+    public class EventsV1Controller : ControllerBase
     {
-        [HttpGet]
-        public Event GetEvent([FromRoute] int eventId)
+        [HttpGet("{id}")]
+        public Event GetEvent(int id)
         {
             return new Event
             {
-                Id = eventId,
+                Id = id,
             };
         }
     }

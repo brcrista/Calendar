@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Calendar.ApiService
 {
     [ApiController]
-    [Route("[controller]/{userId}")]
-    public class UsersController : ControllerBase
+    [Route("api/v1/users")]
+    public class UsersV1Controller : ControllerBase
     {
-        [HttpGet]
-        public User GetUser([FromRoute] int userId)
+        [HttpGet("{id}")]
+        public User GetUser(int id)
         {
             return new User
             {
-                Id = userId,
+                Id = id,
                 DisplayName = "Jane Doe",
                 Account = new Account
                 {
