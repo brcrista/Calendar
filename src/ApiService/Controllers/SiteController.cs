@@ -13,15 +13,13 @@ namespace Calendar.ApiService.Controllers
         /// <summary>
         /// Tells whether the site is online.
         /// </summary>
-        [HttpGet]
-        [Route("live")]
+        [HttpGet("live")]
         public IActionResult Live() => Ok();
 
         /// <summary>
         /// Tells the UTC time of when the site was deployed.
         /// </summary>
-        [HttpGet]
-        [Route("version")]
+        [HttpGet("version")]
         public DateTime Version() => deployedAt;
 
         private static readonly DateTime deployedAt = DateTime.UtcNow;
