@@ -2,10 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calendar.ApiService
 {
+    /// <summary>
+    /// Provides REST endpoints for resources about users.
+    /// </summary>
     [ApiController]
     [Route("api/v1/users")]
     public class UsersV1Controller : ControllerBase
     {
+        /// <summary>
+        /// Gets data for a given user by their ID.
+        /// </summary>
         [HttpGet("{id}")]
         public User GetUser(int id)
         {
