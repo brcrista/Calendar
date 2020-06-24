@@ -33,6 +33,24 @@ describe('The users endpoint', () => {
         const statusCode = await fetchStatusCode(url);
         expect(statusCode).toStrictEqual(200);
     });
+
+    test("can get an existing user's events", async () => {
+        const url = new URL('users/1/events', apiRoot);
+        const statusCode = await fetchStatusCode(url);
+        expect(statusCode).toStrictEqual(200);
+    });
+
+    test("can filter a user's events with query parameters", async () => {
+        const url = new URL('users/1/events?hostId=2&hasAccepted=false', apiRoot);
+        const statusCode = await fetchStatusCode(url);
+        expect(statusCode).toStrictEqual(200);
+    });
+
+    test('rejects invalid query parameters', async () => {
+        const url = new URL('users/1/events?hostId=hello', apiRoot);
+        const statusCode = await fetchStatusCode(url);
+        expect(statusCode).toStrictEqual(400);
+    });
 });
 
 describe('The events endpoint', () => {
