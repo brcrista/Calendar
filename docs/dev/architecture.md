@@ -2,15 +2,15 @@
 
 ## Techs
 
-* Linux
+* Debian Linux
 * .NET Core 3.1
 * ASP.NET Core MVC
+* ADO.NET
 * SQLite
-* Kestrel
+* Apache
 * HTML
 * CSS
 * JavaScript
-* jQuery
 
 
 ## URL structure
