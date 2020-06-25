@@ -52,6 +52,12 @@ describe('The users endpoint', () => {
         const response = await fetch(url);
         expect(response.statusCode).toStrictEqual(400);
     });
+
+    test("can get an existing user's contacts", async () => {
+        const url = new URL('users/1/contacts', apiRoot);
+        const response = await fetch(url);
+        expect(response.statusCode).toStrictEqual(200);
+    });
 });
 
 describe('The events endpoint', () => {

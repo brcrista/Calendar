@@ -99,5 +99,21 @@ namespace Calendar.ApiService
 
             return events;
         }
+
+        /// <summary>
+        /// Gets the other users that the user has connected with.
+        /// </summary>
+        [HttpGet("contacts")]
+        public IEnumerable<User> GetContacts(int id)
+        {
+            return new[]
+            {
+                new User
+                {
+                    Id = 10,
+                    DisplayName = "Joe Schmoe"
+                }
+            };
+        }
     }
 }
