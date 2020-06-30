@@ -12,7 +12,11 @@ namespace Calendar.ApiService.DataAccess
 
         private DataReader(string databaseFilepath)
         {
-            this.dbConnection = new SqliteConnection($"Data Source={databaseFilepath}");
+            this.dbConnection = new SqliteConnection(new SqliteConnectionStringBuilder
+            {
+                ["Data Source"] = databaseFilepath,
+                ["Mode"] = SqliteOpenMode.ReadOnly
+            }.ConnectionString);
         }
 
         public static async Task<DataReader> ConnectAsync(string databaseFilepath)
