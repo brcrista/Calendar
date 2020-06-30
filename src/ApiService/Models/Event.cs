@@ -1,6 +1,6 @@
 using System;
 
-namespace Calendar.ApiService
+namespace Calendar.ApiService.Models
 {
     public sealed class Event
     {

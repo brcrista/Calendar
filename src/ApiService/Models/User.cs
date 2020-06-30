@@ -1,4 +1,4 @@
-namespace Calendar.ApiService
+namespace Calendar.ApiService.Models
 {
     public sealed class User
     {
