@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Data.Sqlite;
 
-namespace Calendar.ApiService.DataAccess
+namespace Calendar.DataAccess
 {
     public sealed class DataReader : IAsyncDisposable
     {
