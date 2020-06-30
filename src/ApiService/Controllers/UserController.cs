@@ -4,7 +4,7 @@ using System.Linq;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Calendar.ApiService.Models;
+using Calendar.ObjectModel.Models;
 
 namespace Calendar.ApiService.Controllers
 {

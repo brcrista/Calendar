@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
+using Calendar.ObjectModel.Models;
+
 namespace Calendar.ApiService.Controllers
 {
     /// <summary>
