@@ -21,7 +21,8 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<IUserProvider, MemoryUserProvider>()
+                .AddSingleton<IUsersProvider, MemoryUsersProvider>()
+                .AddSingleton<IEventsProvider, MemoryEventsProvider>()
                 .AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
         }
 

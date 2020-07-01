@@ -4,7 +4,7 @@ using Calendar.ObjectModel.Models;
 
 namespace Calendar.ObjectModel.DataProviders
 {
-    public interface IUserProvider
+    public interface IUsersProvider
     {
         User GetUser(int id);
 

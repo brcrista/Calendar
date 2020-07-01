@@ -6,7 +6,7 @@ using Calendar.ObjectModel.Models;
 
 namespace Calendar.ObjectModel.DataProviders
 {
-    public sealed class MemoryUserProvider : IUserProvider
+    public sealed class MemoryUsersProvider : IUsersProvider
     {
         public User GetUser(int id)
         {

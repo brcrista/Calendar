@@ -12,13 +12,13 @@ namespace Calendar.ApiService.Controllers
     /// </summary>
     [ApiController]
     [Route("api/v1/users/{id}")]
-    public class UserV1Controller : ControllerBase
+    public class UsersV1Controller : ControllerBase
     {
-        private readonly IUserProvider userProvider;
+        private readonly IUsersProvider usersProvider;
 
-        public UserV1Controller(IUserProvider userProvider)
+        public UsersV1Controller(IUsersProvider usersProvider)
         {
-            this.userProvider = userProvider;
+            this.usersProvider = usersProvider;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Calendar.ApiService.Controllers
         [HttpGet]
         public User GetUser(int id)
         {
-            return userProvider.GetUser(id);
+            return usersProvider.GetUser(id);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Calendar.ApiService.Controllers
         [HttpGet("events")]
         public IEnumerable<Event> GetEvents(int id, int? hostId, bool? hasAccepted)
         {
-            return userProvider.GetEvents(id, hostId, hasAccepted);
+            return usersProvider.GetEvents(id, hostId, hasAccepted);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Calendar.ApiService.Controllers
         [HttpGet("contacts")]
         public IEnumerable<User> GetContacts(int id)
         {
-            return userProvider.GetContacts(id);
+            return usersProvider.GetContacts(id);
         }
     }
 }
