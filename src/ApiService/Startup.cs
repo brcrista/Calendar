@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Calendar.ObjectModel.DataProviders;
+
 namespace Calendar.ApiService
 {
     public sealed class Startup
@@ -19,6 +21,8 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton<IUsersProvider, MemoryUsersProvider>()
+                .AddSingleton<IEventsProvider, MemoryEventsProvider>()
                 .AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
         }
 
