@@ -1,9 +1,6 @@
-// Prerequisite: deploy the Calendar API service
-
+'use strict';
 const http = require('http');
 const URL = require('url').URL;
-
-const apiRoot = 'http://localhost:1498/api/v1/';
 
 /**
  * Call a URL and return the response's status code.
@@ -21,6 +18,9 @@ function fetch(url) {
         });
     });
 }
+
+// Prerequisite: deploy the Calendar API service
+const apiRoot = 'http://localhost:1498/api/v1/';
 
 describe('The users endpoint', () => {
     test('returns 404 for all users', async () => {
