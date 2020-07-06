@@ -1,23 +1,7 @@
 'use strict';
-const http = require('http');
 const URL = require('url').URL;
 
-/**
- * Call a URL and return the response's status code.
- * @param {URL} url - URL to call for a status code
- * @returns {Promise} - the HTTP response message
- */
-function fetch(url) {
-    return new Promise((resolve, reject) => {
-        http.get(url, (res) => {
-            try {
-                resolve(res);
-            } catch (error) {
-                reject(error);
-            }
-        });
-    });
-}
+const fetch = require('js-helpers/node').fetch;
 
 // Prerequisite: deploy the Calendar API service
 const apiRoot = 'http://localhost:1498/api/v1/';
