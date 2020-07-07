@@ -6,6 +6,9 @@ using Microsoft.Data.Sqlite;
 
 namespace Calendar.DataAccess
 {
+    /// <summary>
+    /// Provides read-only access to a SQLite database.
+    /// </summary>
     public sealed class SqliteDataReader : IAsyncDisposable
     {
         private readonly SqliteConnection dbConnection;

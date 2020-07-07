@@ -6,3 +6,6 @@ obj/
 
 # JavaScript
 node_modules/
+
+# SQLite
+*.db

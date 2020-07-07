@@ -9,9 +9,9 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public sealed class MemoryUsersProvider : IUsersProvider
     {
-        public Task<User> GetUserAsync(int id)
+        public Task<User?> GetUserAsync(int id)
         {
-            return Task.FromResult(new User
+            return Task.FromResult<User?>(new User
             {
                 Id = id,
                 DisplayName = "Jane Doe",

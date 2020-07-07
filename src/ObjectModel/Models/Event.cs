@@ -4,7 +4,7 @@ namespace Calendar.ObjectModel.Models
 {
     public sealed class Event
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string? Title { get; set; }
 

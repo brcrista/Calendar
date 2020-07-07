@@ -26,9 +26,17 @@ namespace Calendar.ApiService.Controllers
         /// Gets data for a given user by their ID.
         /// </summary>
         [HttpGet]
-        public async Task<User> GetUserAsync(int id)
+        public async Task<IActionResult> GetUserAsync(int id)
         {
-            return await usersProvider.GetUserAsync(id);
+            var user = await usersProvider.GetUserAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(user);
+            }
         }
 
         /// <summary>
