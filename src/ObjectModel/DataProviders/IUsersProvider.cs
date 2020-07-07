@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Calendar.ObjectModel.Models;
 
@@ -6,10 +7,10 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public interface IUsersProvider
     {
-        User GetUser(int id);
+        Task<User> GetUserAsync(int id);
 
-        IEnumerable<Event> GetEvents(int id, int? hostId, bool? hasAccepted);
+        Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted);
 
-        IEnumerable<User> GetContacts(int id);
+        Task<IEnumerable<User>> GetContactsAsync(int id);
     }
 }

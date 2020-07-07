@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,27 +26,27 @@ namespace Calendar.ApiService.Controllers
         /// Gets data for a given user by their ID.
         /// </summary>
         [HttpGet]
-        public User GetUser(int id)
+        public async Task<User> GetUserAsync(int id)
         {
-            return usersProvider.GetUser(id);
+            return await usersProvider.GetUserAsync(id);
         }
 
         /// <summary>
         /// Gets all future events that a user has been invited to.
         /// </summary>
         [HttpGet("events")]
-        public IEnumerable<Event> GetEvents(int id, int? hostId, bool? hasAccepted)
+        public async Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted)
         {
-            return usersProvider.GetEvents(id, hostId, hasAccepted);
+            return await usersProvider.GetEventsAsync(id, hostId, hasAccepted);
         }
 
         /// <summary>
         /// Gets the other users that the user has connected with.
         /// </summary>
         [HttpGet("contacts")]
-        public IEnumerable<User> GetContacts(int id)
+        public async Task<IEnumerable<User>> GetContactsAsync(int id)
         {
-            return usersProvider.GetContacts(id);
+            return await usersProvider.GetContactsAsync(id);
         }
     }
 }

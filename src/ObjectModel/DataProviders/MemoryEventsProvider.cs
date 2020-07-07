@@ -1,15 +1,17 @@
-﻿using Calendar.ObjectModel.Models;
+﻿using System.Threading.Tasks;
+
+using Calendar.ObjectModel.Models;
 
 namespace Calendar.ObjectModel.DataProviders
 {
     public sealed class MemoryEventsProvider : IEventsProvider
     {
-        public Event GetEvent(int id)
+        public Task<Event> GetEventAsync(int id)
         {
-            return new Event
+            return Task.FromResult(new Event
             {
                 Id = id,
-            };
+            });
         }
     }
 }

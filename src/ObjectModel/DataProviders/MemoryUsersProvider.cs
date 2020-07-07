@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Calendar.ObjectModel.Models;
 
@@ -8,9 +9,9 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public sealed class MemoryUsersProvider : IUsersProvider
     {
-        public User GetUser(int id)
+        public Task<User> GetUserAsync(int id)
         {
-            return new User
+            return Task.FromResult(new User
             {
                 Id = id,
                 DisplayName = "Jane Doe",
@@ -20,10 +21,10 @@ namespace Calendar.ObjectModel.DataProviders
                     Email = "jane.doe@email.com",
                     Password = "1234"
                 }
-            };
+            });
         }
 
-        public IEnumerable<Event> GetEvents(int id, int? hostId, bool? hasAccepted)
+        public Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted)
         {
             IEnumerable<Event> events = new[]
             {
@@ -85,12 +86,12 @@ namespace Calendar.ObjectModel.DataProviders
                 }
             }
 
-            return events;
+            return Task.FromResult(events);
         }
 
-        public IEnumerable<User> GetContacts(int id)
+        public Task<IEnumerable<User>> GetContactsAsync(int id)
         {
-            return new[]
+            IEnumerable<User> contacts = new[]
             {
                 new User
                 {
@@ -98,6 +99,8 @@ namespace Calendar.ObjectModel.DataProviders
                     DisplayName = "Joe Schmoe"
                 }
             };
+
+            return Task.FromResult(contacts);
         }
     }
 }

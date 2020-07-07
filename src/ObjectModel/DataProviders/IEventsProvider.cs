@@ -1,9 +1,11 @@
+using System.Threading.Tasks;
+
 using Calendar.ObjectModel.Models;
 
 namespace Calendar.ObjectModel.DataProviders
 {
     public interface IEventsProvider
     {
-        Event GetEvent(int id);
+        Task<Event> GetEventAsync(int id);
     }
 }
