@@ -6,11 +6,11 @@ using Microsoft.Data.Sqlite;
 
 namespace Calendar.DataAccess
 {
-    public sealed class DataReader : IAsyncDisposable
+    public sealed class SqliteDataReader : IAsyncDisposable
     {
         private readonly SqliteConnection dbConnection;
 
-        private DataReader(string databaseFilepath)
+        private SqliteDataReader(string databaseFilepath)
         {
             this.dbConnection = new SqliteConnection(new SqliteConnectionStringBuilder
             {
@@ -19,9 +19,9 @@ namespace Calendar.DataAccess
             }.ConnectionString);
         }
 
-        public static async Task<DataReader> ConnectAsync(string databaseFilepath)
+        public static async Task<SqliteDataReader> ConnectAsync(string databaseFilepath)
         {
-            var result = new DataReader(databaseFilepath);
+            var result = new SqliteDataReader(databaseFilepath);
             await result.dbConnection.OpenAsync();
             return result;
         }
@@ -31,7 +31,7 @@ namespace Calendar.DataAccess
             await dbConnection.DisposeAsync();
         }
 
-        public async IAsyncEnumerable<object[]> ExecuteAsync(string sql, IReadOnlyDictionary<string, object> parameters)
+        public async IAsyncEnumerable<object[]> ExecuteAsync(string sql, IReadOnlyDictionary<string, object>? parameters = null)
         {
             SqliteCommand command = CreateCommand(sql, parameters);
             using var reader = await command.ExecuteReaderAsync();
@@ -43,14 +43,17 @@ namespace Calendar.DataAccess
             }
         }
 
-        private SqliteCommand CreateCommand(string sql, IReadOnlyDictionary<string, object> parameters)
+        private SqliteCommand CreateCommand(string sql, IReadOnlyDictionary<string, object>? parameters)
         {
             var command = dbConnection.CreateCommand();
             command.CommandText = sql;
 
-            foreach (var kvp in parameters)
+            if (parameters != null)
             {
-                command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                foreach (var kvp in parameters)
+                {
+                    command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                }
             }
 
             return command;
