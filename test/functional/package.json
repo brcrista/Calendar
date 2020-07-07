@@ -10,6 +10,7 @@
   "author": "Brian Cristante",
   "private": true,
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "js-helpers": "https://github.com/brcrista/JavaScript-Helpers/releases/download/v2.0.0/js-helpers-2.0.0.tgz"
   }
 }
