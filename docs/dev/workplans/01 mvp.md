@@ -14,26 +14,25 @@
 
 ## Work plan
 
-| Client | Service | Data |
-| ------ | ------- | ---- |
-|        | stub out API endpoints | in-memory |
-|        | | add actual tables |
-|        | wire through to the database | |
-| View for a single user (static data) | | |
-| View for a single event (static data) | | |
-| Views for multiple users (call API) | | |
-| Views for multiple events (call API) | | |
-| Add styling | | |
-| Forms for "register" and "login" | "register" and "login" flows | |
-| | Input validation | |
-| Input validation | | |
-| | salt and encrypt passwords | |
-| | Private APIs | |
-| Views for "my events" and "invitations" | | |
-| | create event API |
-| | delete event API |
-| Form for creating an event | | |
-| | update account API | |
-| | update user API |
-| | delete user API |
-| View for account management | |
+| Done | Client | Service | Data |
+| ---- | ------ | ------- | ---- |
+| ✔ |        | stub out API endpoints | in-memory |
+| ✔ |        | | add actual tables |
+|  |        | wire through to the database | |
+|  | View for a single user (static data) | | |
+|  | View for a single event (static data) | | |
+|  | Views for multiple users (call API) | | |
+|  | Views for multiple events (call API) | | |
+|  | Add styling | | |
+|  | Forms for "register" and "login" | "register" and "login" flows | |
+|  | | Input validation | |
+|  | | salt and encrypt passwords | |
+|  | | Private APIs | |
+|  | Views for "my events" and "invitations" | | |
+|  | | create event API |
+|  | | delete event API |
+|  | Form for creating an event | | |
+|  | | update account API | |
+|  | | update user API |
+|  | | delete user API |
+|  | View for account management | |
