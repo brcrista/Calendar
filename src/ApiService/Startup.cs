@@ -22,6 +22,7 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton(sp => new SqliteDatabaseContext(@"C:\Users\Brian\Code\GitHub\brcrista\Calendar\calendar.db"))
                 .AddSingleton<EventsTableAccess>()
                 .AddSingleton<IUsersProvider, MemoryUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
