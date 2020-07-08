@@ -15,12 +15,7 @@ namespace Calendar.ObjectModel.DataProviders
             {
                 Id = id,
                 DisplayName = "Jane Doe",
-                Account = new Account
-                {
-                    Id = 1,
-                    Email = "jane.doe@email.com",
-                    Password = "1234"
-                }
+                AccountId = 1
             });
         }
 

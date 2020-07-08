@@ -26,14 +26,11 @@ namespace Calendar.ObjectModel.DataProviders
             {
                 Debug.Assert(result == null, "Since `id` is a primary key, we should get at most one row back.");
 
-                // TODO look up account
-                Account? account = null;
-
                 result = new User
                 {
                     Id = row.Id,
                     DisplayName = row.DisplayName,
-                    Account = account
+                    AccountId = row.AccountId
                 };
             }
 
