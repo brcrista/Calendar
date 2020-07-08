@@ -17,7 +17,7 @@ namespace Calendar.ObjectModel.DataProviders
             this.usersTable = usersTable;
         }
 
-        public async Task<User?> GetUserAsync(int id)
+        public async Task<User?> GetUserAsync(long id)
         {
             var resultRows = usersTable.GetUsersAsync(id);
 
@@ -40,7 +40,7 @@ namespace Calendar.ObjectModel.DataProviders
             return result;
         }
 
-        public Task<IEnumerable<User>> GetContactsAsync(int id)
+        public Task<IEnumerable<User>> GetContactsAsync(long id)
         {
             // TODO
             return Task.FromResult(Enumerable.Empty<User>());

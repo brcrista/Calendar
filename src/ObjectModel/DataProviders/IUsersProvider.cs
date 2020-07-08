@@ -7,10 +7,10 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public interface IUsersProvider
     {
-        Task<User?> GetUserAsync(int id);
+        Task<User?> GetUserAsync(long id);
 
         Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted);
 
-        Task<IEnumerable<User>> GetContactsAsync(int id);
+        Task<IEnumerable<User>> GetContactsAsync(long id);
     }
 }

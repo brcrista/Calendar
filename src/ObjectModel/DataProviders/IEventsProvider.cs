@@ -6,6 +6,6 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public interface IEventsProvider
     {
-        Task<Event?> GetEventAsync(int id);
+        Task<Event?> GetEventAsync(long id);
     }
 }

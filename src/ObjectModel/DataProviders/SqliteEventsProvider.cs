@@ -10,13 +10,15 @@ namespace Calendar.ObjectModel.DataProviders
     public sealed class SqliteEventsProvider : IEventsProvider
     {
         private readonly EventsTableAccess eventsTable;
+        private readonly IUsersProvider usersProvider;
 
-        public SqliteEventsProvider(EventsTableAccess eventsTable)
+        public SqliteEventsProvider(EventsTableAccess eventsTable, IUsersProvider usersProvider)
         {
             this.eventsTable = eventsTable;
+            this.usersProvider = usersProvider;
         }
 
-        public async Task<Event?> GetEventAsync(int id)
+        public async Task<Event?> GetEventAsync(long id)
         {
             var resultRows = eventsTable.GetEventsAsync(id);
 
@@ -47,8 +49,15 @@ namespace Calendar.ObjectModel.DataProviders
                     endTime = null;
                 }
 
-                // TODO look up owner
-                User? owner = null;
+                User? owner;
+                if (row.OwnerId != null)
+                {
+                    owner = await usersProvider.GetUserAsync(row.OwnerId.Value);
+                }
+                else
+                {
+                    owner = null;
+                }
 
                 result = new Event
                 {

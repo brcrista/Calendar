@@ -9,7 +9,7 @@ namespace Calendar.ObjectModel.DataProviders
 {
     public sealed class MemoryUsersProvider : IUsersProvider
     {
-        public Task<User?> GetUserAsync(int id)
+        public Task<User?> GetUserAsync(long id)
         {
             return Task.FromResult<User?>(new User
             {
@@ -89,7 +89,7 @@ namespace Calendar.ObjectModel.DataProviders
             return Task.FromResult(events);
         }
 
-        public Task<IEnumerable<User>> GetContactsAsync(int id)
+        public Task<IEnumerable<User>> GetContactsAsync(long id)
         {
             IEnumerable<User> contacts = new[]
             {

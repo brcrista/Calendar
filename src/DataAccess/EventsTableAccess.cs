@@ -16,7 +16,7 @@ namespace Calendar.DataAccess
             dataReader = new SqliteDataReader(dbContext.DatabaseFilepath);
         }
 
-        public async IAsyncEnumerable<EventsRow> GetEventsAsync(int id)
+        public async IAsyncEnumerable<EventsRow> GetEventsAsync(long id)
         {
             var resultRows = dataReader.ExecuteAsync(
                 sql: "SELECT * FROM Events WHERE id = $id;",

@@ -16,7 +16,7 @@ namespace Calendar.DataAccess
             dataReader = new SqliteDataReader(dbContext.DatabaseFilepath);
         }
 
-        public async IAsyncEnumerable<UsersRow> GetUsersAsync(int id)
+        public async IAsyncEnumerable<UsersRow> GetUsersAsync(long id)
         {
             var resultRows = dataReader.ExecuteAsync(
                 sql: "SELECT * FROM Users WHERE id = $id;",

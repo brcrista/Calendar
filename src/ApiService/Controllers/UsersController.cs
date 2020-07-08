@@ -26,7 +26,7 @@ namespace Calendar.ApiService.Controllers
         /// Gets data for a given user by their ID.
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetUserAsync(int id)
+        public async Task<IActionResult> GetUserAsync(long id)
         {
             var user = await usersProvider.GetUserAsync(id);
             if (user == null)
@@ -52,7 +52,7 @@ namespace Calendar.ApiService.Controllers
         /// Gets the other users that the user has connected with.
         /// </summary>
         [HttpGet("contacts")]
-        public async Task<IEnumerable<User>> GetContactsAsync(int id)
+        public async Task<IEnumerable<User>> GetContactsAsync(long id)
         {
             return await usersProvider.GetContactsAsync(id);
         }
