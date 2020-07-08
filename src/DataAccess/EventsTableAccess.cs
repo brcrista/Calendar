@@ -11,9 +11,9 @@ namespace Calendar.DataAccess
     {
         private readonly SqliteDataReader dataReader;
 
-        public EventsTableAccess(SqliteDataReader dataReader)
+        public EventsTableAccess()
         {
-            this.dataReader = dataReader;
+            dataReader = new SqliteDataReader(@"C:\Users\Brian\Code\GitHub\brcrista\Calendar\calendar.db");
         }
 
         public async IAsyncEnumerable<EventsRow> GetEventsAsync(int id)

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using Microsoft.Data.Sqlite;
 
@@ -9,34 +7,25 @@ namespace Calendar.DataAccess
     /// <summary>
     /// Provides read-only access to a SQLite database.
     /// </summary>
-    public sealed class SqliteDataReader : IAsyncDisposable
+    internal sealed class SqliteDataReader
     {
-        private readonly SqliteConnection dbConnection;
+        private readonly string connectionString;
 
-        private SqliteDataReader(string databaseFilepath)
+        public SqliteDataReader(string databaseFilepath)
         {
-            this.dbConnection = new SqliteConnection(new SqliteConnectionStringBuilder
+            this.connectionString = new SqliteConnectionStringBuilder
             {
                 ["Data Source"] = databaseFilepath,
                 ["Mode"] = SqliteOpenMode.ReadOnly
-            }.ConnectionString);
-        }
-
-        public static async Task<SqliteDataReader> ConnectAsync(string databaseFilepath)
-        {
-            var result = new SqliteDataReader(databaseFilepath);
-            await result.dbConnection.OpenAsync();
-            return result;
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await dbConnection.DisposeAsync();
+            }.ConnectionString;
         }
 
         public async IAsyncEnumerable<object[]> ExecuteAsync(string sql, IReadOnlyDictionary<string, object>? parameters = null)
         {
-            SqliteCommand command = CreateCommand(sql, parameters);
+            await using var dbConnection = new SqliteConnection(connectionString);
+            await dbConnection.OpenAsync();
+
+            SqliteCommand command = CreateCommand(dbConnection, sql, parameters);
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
@@ -46,7 +35,7 @@ namespace Calendar.DataAccess
             }
         }
 
-        private SqliteCommand CreateCommand(string sql, IReadOnlyDictionary<string, object>? parameters)
+        private SqliteCommand CreateCommand(SqliteConnection dbConnection, string sql, IReadOnlyDictionary<string, object>? parameters)
         {
             var command = dbConnection.CreateCommand();
             command.CommandText = sql;

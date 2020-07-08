@@ -22,9 +22,6 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                // Reuse a single DB connection.
-                .AddSingleton(serviceProvider => SqliteDataReader.ConnectAsync(@"C:\Users\Brian\Code\GitHub\brcrista\Calendar\calendar.db").Result)
-                //.AddSingleton(serviceProvider => SqliteDataReader.ConnectAsync("calendar.db").Result)
                 .AddSingleton<EventsTableAccess>()
                 .AddSingleton<IUsersProvider, MemoryUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
