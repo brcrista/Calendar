@@ -39,7 +39,7 @@ namespace Calendar.ObjectModel.DataProviders
                 }
 
                 DateTime? endTime;
-                if (DateTime.TryParse(row.Start, out DateTime parsedEndTime))
+                if (DateTime.TryParse(row.End, out DateTime parsedEndTime))
                 {
                     endTime = parsedEndTime;
                 }
