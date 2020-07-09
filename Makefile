@@ -1,5 +1,5 @@
 .PHONY: all
-all: build calendar.db install-dev
+all: build calendar.db seed
 
 .PHONY: build
 build: src/Calendar.sln
@@ -9,8 +9,8 @@ calendar.db: src/DataAccess/Sql/tables.sql
 	sqlite3 $@ < $<
 
 # Seed the database with data for testing.
-.PHONY: install-dev
-install-dev: test/seed.sql calendar.db
+.PHONY: seed
+seed: test/seed.sql calendar.db
 	sqlite3 calendar.db < $<
 
 test/functional/node_modules:
@@ -24,4 +24,3 @@ functional-tests: test/functional/node_modules
 .PHONY: clean
 clean:
 	dotnet clean src
-	rm -f calendar.db
