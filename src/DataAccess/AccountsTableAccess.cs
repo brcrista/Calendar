@@ -30,8 +30,8 @@ namespace Calendar.DataAccess
                 yield return new AccountsRow
                 {
                     Id = (long)row[0],
-                    Email = (string?)row[1],
-                    Password = (string?)row[2]
+                    Email = SqliteDataReader.CastReference<string>(row[1]),
+                    Password = SqliteDataReader.CastReference<string>(row[2])
                 };
             }
         }
