@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <ItemGroup>
-    <ProjectReference Include="../DataAccess/DataAccess.csproj" />
-    <ProjectReference Include="../ObjectModel/ObjectModel.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Calendar.ApiService</AssemblyName>
     <RootNamespace>Calendar.ApiService</RootNamespace>
     <Nullable>enable</Nullable>
+    <OutputPath>../../bin/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DataAccess/DataAccess.csproj" />
+    <ProjectReference Include="../ObjectModel/ObjectModel.csproj" />
+  </ItemGroup>
 
 </Project>

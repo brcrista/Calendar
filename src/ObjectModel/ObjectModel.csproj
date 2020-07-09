@@ -9,6 +9,7 @@
     <AssemblyName>Calendar.ObjectModel</AssemblyName>
     <RootNamespace>Calendar.ObjectModel</RootNamespace>
     <Nullable>enable</Nullable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
 </Project>

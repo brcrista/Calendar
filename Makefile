@@ -1,17 +1,25 @@
+BIN := ./bin
+DATABASE := $(BIN)/calendar.db
+DOTNET_CONFIGURATION := Debug
+
 .PHONY: all
-all: build calendar.db install-dev
+all: build $(DATABASE) seed
 
 .PHONY: build
 build: src/Calendar.sln
-	dotnet build $<
+	dotnet build $< --configuration $(DOTNET_CONFIGURATION)
 
-calendar.db: src/DataAccess/Sql/tables.sql
+# Normally, this should get created as a side effect of `make build`
+$(BIN):
+	mkdir -p $(BIN)
+
+$(DATABASE): src/DataAccess/Sql/tables.sql $(BIN)
 	sqlite3 $@ < $<
 
 # Seed the database with data for testing.
-.PHONY: install-dev
-install-dev: test/seed.sql calendar.db
-	sqlite3 calendar.db < $<
+.PHONY: seed
+seed: test/seed.sql $(DATABASE)
+	sqlite3 $(DATABASE) < $<
 
 test/functional/node_modules:
 	cd test/functional && npm install
@@ -24,4 +32,4 @@ functional-tests: test/functional/node_modules
 .PHONY: clean
 clean:
 	dotnet clean src
-	rm -f calendar.db
+	rm -rf $(BIN)
