@@ -7,5 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: make build
-    - run: make schema-tests
+    - run: make
