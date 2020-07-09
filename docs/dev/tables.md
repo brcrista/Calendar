@@ -25,6 +25,7 @@ TABLE Event
   start DATETIME
   end DATETIME
   location TEXT
+  description TEXT
   owner_id FOREIGN KEY -- User -E Event
 
 -- User ## User
