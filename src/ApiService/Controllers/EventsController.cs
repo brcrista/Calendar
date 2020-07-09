@@ -1,6 +1,7 @@
+using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 
-using Calendar.ObjectModel.Models;
 using Calendar.ObjectModel.DataProviders;
 
 namespace Calendar.ApiService.Controllers
@@ -23,9 +24,17 @@ namespace Calendar.ApiService.Controllers
         /// Gets data for a given event by its ID.
         /// </summary>
         [HttpGet("{id}")]
-        public Event GetEvent(int id)
+        public async Task<IActionResult> GetEventAsync(long id)
         {
-            return eventsProvider.GetEvent(id);
+            var event_ = await eventsProvider.GetEventAsync(id);
+            if (event_ == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(event_);
+            }
         }
     }
 }

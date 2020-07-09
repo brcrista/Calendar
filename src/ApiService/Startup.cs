@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Calendar.DataAccess;
 using Calendar.ObjectModel.DataProviders;
 
 namespace Calendar.ApiService
@@ -21,8 +22,12 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<IUsersProvider, MemoryUsersProvider>()
-                .AddSingleton<IEventsProvider, MemoryEventsProvider>()
+                .AddSingleton(sp => new SqliteDatabaseContext(@"C:\Users\Brian\Code\GitHub\brcrista\Calendar\calendar.db"))
+                .AddSingleton<AccountsTableAccess>()
+                .AddSingleton<UsersTableAccess>()
+                .AddSingleton<EventsTableAccess>()
+                .AddSingleton<IUsersProvider, SqliteUsersProvider>()
+                .AddSingleton<IEventsProvider, SqliteEventsProvider>()
                 .AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
         }
 

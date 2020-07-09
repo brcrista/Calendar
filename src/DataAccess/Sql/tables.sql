@@ -1,17 +1,17 @@
-CREATE TABLE User (
+CREATE TABLE Users (
     id INTEGER PRIMARY KEY,
     display_name TEXT,
     account_id INTEGER,
     FOREIGN KEY(account_id) REFERENCES Account(id)
 );
 
-CREATE TABLE Account (
+CREATE TABLE Accounts (
     id INTEGER PRIMARY KEY,
     email TEXT,
     password TEXT
 );
 
-CREATE TABLE Event (
+CREATE TABLE Events (
     id INTEGER PRIMARY KEY,
     title TEXT,
     start TEXT, -- DATETIME
@@ -28,7 +28,7 @@ CREATE TABLE Contacts (
     FOREIGN KEY(user2_id) REFERENCES User(id)
 );
 
-CREATE TABLE UserEvent (
+CREATE TABLE UserEvents (
     user_id INTEGER,
     event_id INTEGER,
     accepted INTEGER, -- BOOLEAN

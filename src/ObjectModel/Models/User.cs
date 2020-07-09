@@ -2,10 +2,14 @@ namespace Calendar.ObjectModel.Models
 {
     public sealed class User
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string? DisplayName { get; set; }
 
-        public Account? Account { get; set; }
+        /// <remarks>
+        /// This is left as an ID because, for security, it should not usually be retrieved.
+        /// A null account ID may represent a deleted account.
+        /// </remarks>
+        public long? AccountId { get; set; }
     }
 }
