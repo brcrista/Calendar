@@ -1,5 +1,7 @@
 # Calendar
 
+[![GitHub Actions build badge](https://github.com/brcrista/Calendar/workflows/CI/badge.svg)](https://github.com/brcrista/Calendar/actions?query=workflow%3ACI)
+
 A simple Web app for learning CRUD.
 
 ## Setup
