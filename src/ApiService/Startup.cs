@@ -1,3 +1,5 @@
+using System.IO;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +24,7 @@ namespace Calendar.ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton(sp => new SqliteDatabaseContext(@"C:\Users\Brian\Code\GitHub\brcrista\Calendar\calendar.db"))
+                .AddSingleton(sp => new SqliteDatabaseContext(Path.Join(Directory.GetCurrentDirectory(), "calendar.db")))
                 .AddSingleton<AccountsTableAccess>()
                 .AddSingleton<UsersTableAccess>()
                 .AddSingleton<EventsTableAccess>()

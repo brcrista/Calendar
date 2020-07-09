@@ -5,6 +5,7 @@
     <AssemblyName>Calendar.DataAccess</AssemblyName>
     <RootNamespace>Calendar.DataAccess</RootNamespace>
     <Nullable>enable</Nullable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
