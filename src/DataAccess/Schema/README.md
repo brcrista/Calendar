@@ -12,6 +12,8 @@ For the data types used:
 * In general, the data type for each property should be the .NET analog of the SQL data type for the column.
     - Note that SQLite doesn't actually type-check its colums.
     - So, it is this layer in the code, not SQLite itself, that enforces that the correct types are going in and coming out of the database.
+* As far as SQLite is concerned, any column except for primary keys is nullable. So, all properties here, except for primary keys, should be nullable.
+    - If something really, truly, can't be null, that should be checked and enforced in higher-level code.
 * Since SQLite uses `TEXT` to represent datetime types, `string` is used here for those types as well. These strings should be parsed to datetimes in higher-level code.
 * Foreign keys should be left as their ID types. Higher-level code should execute the query to look up that data in another table.
     - Alternatively, the join can be done in SQL directly, and the .NET schema types for each table can be aggregated into a new type to represent the result of that query.

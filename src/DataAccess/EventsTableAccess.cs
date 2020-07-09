@@ -30,11 +30,11 @@ namespace Calendar.DataAccess
                 yield return new EventsRow
                 {
                     Id = (long)row[0],
-                    Title = (string)row[1],
-                    Start = (string)row[2],
-                    End = (string)row[3],
-                    Location = (string)row[4],
-                    OwnerId = (long)row[5]
+                    Title = (string?)row[1],
+                    Start = (string?)row[2],
+                    End = (string?)row[3],
+                    Location = (string?)row[4],
+                    OwnerId = (long?)row[5]
                 };
             }
         }
