@@ -22,14 +22,14 @@
 /error
 /login
 /register
-/{user}*
-/{user}/account**
-/{user}/events*
-/{user}/my-events**
-/{user}/invitations**
-/{user}/calendar**
-/{user}/contacts*
-/{event}*
+/users/{user}*
+/users/{user}/account**
+/users/{user}/events*
+/users/{user}/my-events**
+/users/{user}/invitations**
+/users/{user}/calendar**
+/users/{user}/contacts*
+/events/{event}*
 
 /api/v1/ *
 
