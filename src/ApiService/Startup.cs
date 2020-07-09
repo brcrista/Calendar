@@ -23,8 +23,16 @@ namespace Calendar.ApiService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var databaseFilepath = Path.Join(Directory.GetCurrentDirectory(), "calendar.db");
+
+            // Check for the database file early.
+            if (!File.Exists(databaseFilepath))
+            {
+                throw new FileNotFoundException($"Database file {databaseFilepath} does not exist.");
+            }
+
             services
-                .AddSingleton(sp => new SqliteDatabaseContext(Path.Join(Directory.GetCurrentDirectory(), "calendar.db")))
+                .AddSingleton(sp => new SqliteDatabaseContext(databaseFilepath))
                 .AddSingleton<AccountsTableAccess>()
                 .AddSingleton<UsersTableAccess>()
                 .AddSingleton<EventsTableAccess>()
