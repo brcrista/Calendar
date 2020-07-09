@@ -6,8 +6,8 @@ const fetch = require('js-helpers/node').fetch;
 // Prerequisites:
 // - Run `make seed` from the root to seed the database.
 //   These tests assume that the seed data is being used.
-// - Deploy the Calendar API service.
-const apiRoot = 'http://localhost:1498/api/v1/';
+// - Start the Calendar service by running Calendar.ApiService.exe.
+const apiRoot = 'http://localhost:5000/api/v1/';
 
 describe('The users endpoint', () => {
     const existingUserIds = [1, 2, 3, 4];
