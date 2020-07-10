@@ -34,7 +34,8 @@ namespace Calendar.DataAccess
                     Start = SqliteDataReader.CastReference<string>(row[2]),
                     End = SqliteDataReader.CastReference<string>(row[3]),
                     Location = SqliteDataReader.CastReference<string>(row[4]),
-                    OwnerId = SqliteDataReader.CastValue<long>(row[5])
+                    Description = SqliteDataReader.CastReference<string>(row[5]),
+                    OwnerId = SqliteDataReader.CastValue<long>(row[6])
                 };
             }
         }

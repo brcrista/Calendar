@@ -19,8 +19,8 @@
 | ✔ |        | stub out API endpoints | in-memory |
 | ✔ |        | | add actual tables |
 | ✔ |        | wire through to the database | |
-|  | View for a single user (static data) | | |
-|  | View for a single event (static data) | | |
+| ✔ | View for a single user (static data) | | |
+| ✔ | View for a single event (static data) | | |
 |  | Views for multiple users (call API) | | |
 |  | Views for multiple events (call API) | | |
 |  | Add styling | | |
