@@ -9,5 +9,5 @@ jobs:
     - uses: actions/checkout@v2
     - run: sudo apt-get install sqlite3 --yes
     - run: make
-    - run: cd bin && ./Calendar.ApiService &
+    - run: cd bin && ./Calendar.WebService &
     - run: make functional-tests

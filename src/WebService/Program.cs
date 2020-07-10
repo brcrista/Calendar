@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Calendar.ApiService
+namespace Calendar.WebService
 {
     public static class Program
     {

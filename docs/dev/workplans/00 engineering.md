@@ -7,4 +7,4 @@
     - Can I read this at runtime from the .NET assembly metadata?
 - [x] Flexbox Froggy
 - [ ] What's going on with the ports in all the dev deployment options?
-    - Look at `dotnet run --project ApiService` vs. running the `.exe` directly
+    - Look at `dotnet run --project WebService` vs. running the `.exe` directly
