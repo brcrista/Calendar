@@ -24,5 +24,6 @@ cd bin
 To run on Windows:
 
 ```powershell
-.\bin\Calendar.ApiService.exe
+cd bin
+.\Calendar.ApiService.exe
 ```

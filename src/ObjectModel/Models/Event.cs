@@ -14,6 +14,8 @@ namespace Calendar.ObjectModel.Models
 
         public string? Location { get; set; }
 
+        public string? Description { get; set; }
+
         public User? Owner { get; set; }
     }
 }

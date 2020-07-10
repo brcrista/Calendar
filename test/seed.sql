@@ -24,8 +24,8 @@ INSERT INTO Users (id, display_name, account_id)
 VALUES (4, 'Matthew', 4);
 
 -- 2 events
-INSERT INTO Events (id, title, start, end, location, owner_id)
-VALUES (1, 'Brian''s Party', '2020-08-31T00:00', '2020-08-31T04:00', '123 Main St, Raleigh, NC, 27603', 1);
+INSERT INTO Events (id, title, start, end, location, description, owner_id)
+VALUES (1, 'Brian''s Party', '2020-08-31T00:00', '2020-08-31T04:00', '123 Main St, Raleigh, NC, 27603', 'I''m having a party!', 1);
 
-INSERT INTO Events (id, title, start, end, location, owner_id)
-VALUES (2, 'Christmas UTC', '2020-12-25T00:00', '2020-12-25T23:59', NULL, 1);
+INSERT INTO Events (id, title, start, end, location, description, owner_id)
+VALUES (2, 'Christmas UTC', '2020-12-25T00:00', '2020-12-25T23:59', NULL, 'The most wonderful time of the year', 1);
