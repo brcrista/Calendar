@@ -18,12 +18,12 @@ To run on macOS / Linux:
 
 ```bash
 cd bin
-./Calendar.ApiService
+./Calendar.WebService
 ```
 
 To run on Windows:
 
 ```powershell
 cd bin
-.\Calendar.ApiService.exe
+.\Calendar.WebService.exe
 ```

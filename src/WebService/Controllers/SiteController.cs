@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Calendar.ApiService.Controllers
+namespace Calendar.WebService.Controllers
 {
     /// <summary>
     /// Provides access to information about the site.

@@ -27,7 +27,7 @@ $(BIN)/wwwroot: src/wwwroot
 test/functional/node_modules:
 	cd test/functional && npm install
 
-# Start the service first with `dotnet run --project src/ApiService`
+# Start the service first with `dotnet run --project src/WebService`
 .PHONY: functional-tests
 functional-tests: test/functional/node_modules
 	cd test/functional && npm test

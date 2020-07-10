@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Calendar.ObjectModel.DataProviders;
 using Calendar.ObjectModel.Models;
 
-namespace Calendar.ApiService.Controllers
+namespace Calendar.WebService.Controllers
 {
     /// <summary>
     /// Provides REST endpoints for resources about a user.

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Calendar.DataAccess;
 using Calendar.ObjectModel.DataProviders;
 
-namespace Calendar.ApiService
+namespace Calendar.WebService
 {
     public sealed class Startup
     {
