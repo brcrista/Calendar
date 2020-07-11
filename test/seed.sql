@@ -1,3 +1,10 @@
+-- Delete existing data for re-runnability.
+DELETE FROM Accounts;
+DELETE FROM Users;
+DELETE FROM Events;
+DELETE FROM Contacts;
+DELETE FROM UserEvents;
+
 -- Create 4 accounts and 4 users
 INSERT INTO Accounts (id, email, password)
 VALUES (1, 'brian@email.com', '12345678');

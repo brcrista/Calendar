@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     id INTEGER PRIMARY KEY,
     display_name TEXT,
@@ -13,7 +12,6 @@ CREATE TABLE Accounts (
     password TEXT
 );
 
-DROP TABLE IF EXISTS Events;
 CREATE TABLE Events (
     id INTEGER PRIMARY KEY,
     title TEXT,
@@ -25,7 +23,6 @@ CREATE TABLE Events (
     FOREIGN KEY(owner_id) REFERENCES User(id)
 );
 
-DROP TABLE IF EXISTS Contacts;
 CREATE TABLE Contacts (
     user1_id INTEGER,
     user2_id INTEGER,
@@ -33,7 +30,6 @@ CREATE TABLE Contacts (
     FOREIGN KEY(user2_id) REFERENCES User(id)
 );
 
-DROP TABLE IF EXISTS UserEvents;
 CREATE TABLE UserEvents (
     user_id INTEGER,
     event_id INTEGER,
