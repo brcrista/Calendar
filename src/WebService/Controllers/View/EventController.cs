@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Calendar.ObjectModel.DataProviders;
 
 namespace Calendar.WebService.Controllers.View
 {
@@ -6,10 +10,25 @@ namespace Calendar.WebService.Controllers.View
     [Route("events/{id}")]
     public sealed class EventController : Controller
     {
-        public IActionResult GetEvent(long id)
+        private readonly IEventsProvider eventsProvider;
+
+        public EventController(IEventsProvider eventsProvider)
         {
-            ViewBag.Title = "TITLE";
-            return View();
+            this.eventsProvider = eventsProvider;
+        }
+
+        public async Task<IActionResult> GetEvent(long id)
+        {
+            var event_ = await eventsProvider.GetEventAsync(id);
+            if (event_ == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ViewBag.Title = event_.Title;
+                return View(event_);
+            }
         }
     }
 }

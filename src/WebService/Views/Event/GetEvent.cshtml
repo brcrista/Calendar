@@ -7,10 +7,14 @@
     <li>Start time: @(Model.Start)</li>
     <li>End time: @(Model.End)</li>
     <li>Location: @(Model.Location)</li>
-    <li>Organizer: <a href="../users/@(Model.Owner.Id)">@(Model.Owner.DisplayName)</a></li>
+    @if (Model.Owner != null)
+    {
+        <li>Organizer: <a href="../users/@(Model.Owner.Id)">@(Model.Owner.DisplayName)</a></li>
+    }
   </ol>
   <p id="description">@(Model.Description)</p>
 </div>
+<div>
   <h2>Attendees</h2>
   <ul>
     <li><a href="../users/1.html">USER_DISPLAY_NAME</a></li>
