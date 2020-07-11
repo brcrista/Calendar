@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Calendar.WebService.Controllers
+namespace Calendar.WebService.Controllers.View
 {
     [Controller]
     [Route("users/{id}")]
-    public sealed class UserViewController : Controller
+    public sealed class UserController : Controller
     {
-        public IActionResult ViewUser(long id)
+        public IActionResult GetUser(long id)
         {
             return View();
         }
