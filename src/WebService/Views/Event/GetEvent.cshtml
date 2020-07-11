@@ -1,12 +1,15 @@
-<h1>TITLE</h1>
+@using Calendar.ObjectModel.Models;
+
+@model Event
+<h1>@(Model.Title)</h1>
 <div id="details">
   <ol>
-    <li>Start time: STARTTIME</li>
-    <li>End time: ENDTIME</li>
-    <li>Location: LOCATION</li>
-    <li>Organizer: <a href="../users/1.html">USER_DISPLAY_NAME</a></li>
+    <li>Start time: @(Model.Start)</li>
+    <li>End time: @(Model.End)</li>
+    <li>Location: @(Model.Location)</li>
+    <li>Organizer: <a href="../users/@(Model.Owner.Id)">@(Model.Owner.DisplayName)</a></li>
   </ol>
-  <p id="description">DESCRIPTION</p>
+  <p id="description">@(Model.Description)</p>
 </div>
   <h2>Attendees</h2>
   <ul>

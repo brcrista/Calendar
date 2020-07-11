@@ -1,12 +1,15 @@
-<h1>DISPLAY_NAME's profile</h1>
+@using Calendar.ObjectModel.Models;
+
+@model User
+<h1>@(Model.DisplayName)'s profile</h1>
 <div id="events">
-  <h2>DISPLAY_NAME's upcoming events</h2>
+  <h2>@(Model.DisplayName)'s upcoming events</h2>
   <ul>
     <li><a href="../events/1.html">EVENT_TITLE</a></li>
   </ul>
 </div>
 <div id="contacts">
-  <h2>DISPLAY_NAME's contacts</h2>
+  <h2>@(Model.DisplayName)'s contacts</h2>
   <ul>
   </ul>
 </div>
