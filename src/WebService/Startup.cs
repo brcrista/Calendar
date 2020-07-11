@@ -11,6 +11,9 @@ using Calendar.ObjectModel.DataProviders;
 
 namespace Calendar.WebService
 {
+    /// <summary>
+    /// Exposes methods that get called on application startup.
+    /// </summary>
     public sealed class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,7 +23,12 @@ namespace Calendar.WebService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Injects dependencies into the app container.
+        /// </summary>
+        /// <remarks>
+        /// This method gets called on startup by the ASP.NET runtime.
+        /// </remarks>
         public void ConfigureServices(IServiceCollection services)
         {
             var databaseFilepath = Path.Join(Directory.GetCurrentDirectory(), "calendar.db");
@@ -44,7 +52,12 @@ namespace Calendar.WebService
                 });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Adds middleware to the HTTP request pipeline.
+        /// </summary>
+        /// <remarks>
+        /// This method gets called on startup by the ASP.NET runtime.
+        /// </remarks>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
