@@ -38,7 +38,10 @@ namespace Calendar.WebService
                 .AddSingleton<EventsTableAccess>()
                 .AddSingleton<IUsersProvider, SqliteUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
-                .AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
+                .AddControllersWithViews(options =>
+                {
+                    options.SuppressAsyncSuffixInActionNames = false;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

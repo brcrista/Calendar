@@ -3,7 +3,7 @@ DATABASE := $(BIN)/calendar.db
 DOTNET_CONFIGURATION := Debug
 
 .PHONY: all
-all: build $(DATABASE) seed $(BIN)/wwwroot
+all: build $(DATABASE) seed
 
 .PHONY: build
 build: src/Calendar.sln
@@ -20,9 +20,6 @@ $(DATABASE): src/DataAccess/Sql/tables.sql $(BIN)
 .PHONY: seed
 seed: test/seed.sql $(DATABASE)
 	sqlite3 $(DATABASE) < $<
-
-$(BIN)/wwwroot: src/wwwroot
-	cp -r $< $(BIN)
 
 test/functional/node_modules:
 	cd test/functional && npm install
