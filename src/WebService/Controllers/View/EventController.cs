@@ -8,6 +8,7 @@ namespace Calendar.WebService.Controllers.View
     {
         public IActionResult GetEvent(long id)
         {
+            ViewBag.Title = "TITLE";
             return View();
         }
     }

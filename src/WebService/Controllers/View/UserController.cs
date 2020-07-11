@@ -8,6 +8,7 @@ namespace Calendar.WebService.Controllers.View
     {
         public IActionResult GetUser(long id)
         {
+            ViewBag.Title = "DISPLAY_NAME's profile";
             return View();
         }
     }
