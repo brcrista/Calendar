@@ -38,13 +38,10 @@ namespace Calendar.WebService
                 .AddSingleton<EventsTableAccess>()
                 .AddSingleton<IUsersProvider, SqliteUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
-                .AddControllers(options =>
+                .AddControllersWithViews(options =>
                 {
-                    options.EnableEndpointRouting = false;
                     options.SuppressAsyncSuffixInActionNames = false;
                 });
-
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +54,6 @@ namespace Calendar.WebService
 
             app
                 .UseStaticFiles()
-                .UseMvc()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {
