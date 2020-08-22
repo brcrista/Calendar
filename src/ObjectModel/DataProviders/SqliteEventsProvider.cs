@@ -13,7 +13,10 @@ namespace Calendar.ObjectModel.DataProviders
         private readonly UserEventsTableAccess userEventsTable;
         private readonly IUsersProvider usersProvider;
 
-        public SqliteEventsProvider(EventsTableAccess eventsTable, UserEventsTableAccess userEventsTable, IUsersProvider usersProvider)
+        public SqliteEventsProvider(
+            EventsTableAccess eventsTable,
+            UserEventsTableAccess userEventsTable,
+            IUsersProvider usersProvider)
         {
             this.eventsTable = eventsTable;
             this.userEventsTable = userEventsTable;
@@ -74,6 +77,11 @@ namespace Calendar.ObjectModel.DataProviders
                 await foreach (var userEventsRow in userEventsTable.GetByEventAsync(result.Id))
                 {
                     var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
+                    if (user == null)
+                    {
+                        throw new DataConsistencyException($"The UserEvents table contains a user ID {userEventsRow.EventId}, but no such user exists in the Users table.");
+                    }
+
                     result.Attendees.Add(new Attendee
                     {
                         User = user,

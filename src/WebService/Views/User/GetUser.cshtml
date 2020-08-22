@@ -5,7 +5,10 @@
 <div id="events">
   <h2>@(Model.DisplayName)'s upcoming events</h2>
   <ul>
-    <li><a href="../events/1.html">EVENT_TITLE</a></li>
+      @foreach (var event_ in Model.Events)
+      {
+          <li><a href="../events/@(event_.Id)">@(event_.Title)</a></li>
+      }
   </ul>
 </div>
 <div id="contacts">

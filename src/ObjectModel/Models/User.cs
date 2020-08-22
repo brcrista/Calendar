@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Calendar.ObjectModel.Models
 {
     public sealed class User
@@ -11,5 +13,7 @@ namespace Calendar.ObjectModel.Models
         /// A null account ID may represent a deleted account.
         /// </remarks>
         public long? AccountId { get; set; }
+
+        public IList<Event> Events { get; set; } = new List<Event>();
     }
 }
