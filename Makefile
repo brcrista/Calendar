@@ -33,6 +33,10 @@ test/functional/node_modules:
 functional-tests: test/functional/node_modules
 	cd test/functional && npm test
 
+# There seems to be an issue here where the bin/ and obj/ directories
+# don't get removed on the first try.
+# Maybe MSBuild is locking them.
+# Rerunning `make clean` should fix it.
 .PHONY: clean
 clean:
 	rm -rf bin/ dist/ obj/
