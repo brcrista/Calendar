@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -60,7 +61,7 @@ namespace Calendar.ObjectModel.DataProviders
                 owner = null;
             }
 
-            var result = new Event
+            return new Event
             {
                 Id = row.Id,
                 Title = row.Title,
@@ -69,8 +70,11 @@ namespace Calendar.ObjectModel.DataProviders
                 Location = row.Location,
                 Owner = owner
             };
+        }
 
-            await foreach (var userEventsRow in userEventsTable.GetByEventAsync(result.Id))
+        public async IAsyncEnumerable<Guest> GetGuestsAsync(long id, bool? hasAccepted)
+        {
+            await foreach (var userEventsRow in userEventsTable.GetByEventAsync(id))
             {
                 var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
                 if (user == null)
@@ -78,14 +82,12 @@ namespace Calendar.ObjectModel.DataProviders
                     throw new DataConsistencyException($"The UserEvents table contains a user ID {userEventsRow.EventId}, but no such user exists in the Users table.");
                 }
 
-                result.Attendees.Add(new Attendee
+                yield return new Guest
                 {
                     User = user,
                     HasAccepted = Convert.ToBoolean(userEventsRow.Accepted)
-                });
+                };
             }
-
-            return result;
         }
     }
 }

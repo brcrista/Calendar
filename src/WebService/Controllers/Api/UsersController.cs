@@ -1,10 +1,9 @@
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
 using Calendar.ObjectModel.DataProviders;
-using Calendar.ObjectModel.Models;
 
 namespace Calendar.WebService.Controllers.Api
 {
@@ -43,18 +42,20 @@ namespace Calendar.WebService.Controllers.Api
         /// Gets all future events that a user has been invited to.
         /// </summary>
         [HttpGet("events")]
-        public async Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted)
+        public async Task<IActionResult> GetEventsAsync(int id, int? hostId, bool? hasAccepted)
         {
-            return await usersProvider.GetEventsAsync(id, hostId, hasAccepted);
+            var events = await usersProvider.GetEventsAsync(id, hostId, hasAccepted).ToArrayAsync();
+            return Ok(events);
         }
 
         /// <summary>
         /// Gets the other users that the user has connected with.
         /// </summary>
         [HttpGet("contacts")]
-        public async Task<IEnumerable<User>> GetContactsAsync(long id)
+        public async Task<IActionResult> GetContactsAsync(long id)
         {
-            return await usersProvider.GetContactsAsync(id);
+            var contacts = await usersProvider.GetContactsAsync(id).ToArrayAsync();
+            return Ok(contacts);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,16 @@ namespace Calendar.WebService.Controllers.Api
             {
                 return Ok(event_);
             }
+        }
+
+        /// <summary>
+        /// Gets all users invited to an event.
+        /// </summary>
+        [HttpGet("guests")]
+        public async Task<IActionResult> GetGuestsAsync(int id,  bool? hasAccepted)
+        {
+            var guests = await eventsProvider.GetGuestsAsync(id, hasAccepted).ToArrayAsync();
+            return Ok(guests);
         }
     }
 }

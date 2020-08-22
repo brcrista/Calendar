@@ -35,7 +35,19 @@ namespace Calendar.ObjectModel.DataProviders
                 AccountId = row.AccountId
             };
 
-            await foreach (var userEventsRow in userEventsTable.GetByUserAsync(result.Id))
+            return result;
+        }
+
+        public IAsyncEnumerable<User> GetContactsAsync(long id)
+        {
+            // TODO
+            return AsyncEnumerable.Empty<User>();
+        }
+
+        public async IAsyncEnumerable<Event> GetEventsAsync(long id, long? hostId, bool? hasAccepted)
+        {
+            // TODO hostId and hasAccepted
+            await foreach (var userEventsRow in userEventsTable.GetByUserAsync(id))
             {
                 var event_ = await eventsProvider.GetEventAsync(userEventsRow.EventId);
                 if (event_ == null)
@@ -43,22 +55,8 @@ namespace Calendar.ObjectModel.DataProviders
                     throw new DataConsistencyException($"The UserEvents table contains an event ID {userEventsRow.EventId}, but no such event exists in the Events table.");
                 }
 
-                result.Events.Add(event_);
+                yield return event_;
             }
-
-            return result;
-        }
-
-        public Task<IEnumerable<User>> GetContactsAsync(long id)
-        {
-            // TODO
-            return Task.FromResult(Enumerable.Empty<User>());
-        }
-
-        public Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted)
-        {
-            // TODO
-            return Task.FromResult(Enumerable.Empty<Event>());
         }
     }
 }

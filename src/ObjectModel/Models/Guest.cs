@@ -1,6 +1,6 @@
 ﻿namespace Calendar.ObjectModel.Models
 {
-    public sealed class Attendee
+    public sealed class Guest
     {
         public User? User { get; set; }
 

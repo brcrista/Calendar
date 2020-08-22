@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,9 @@ namespace Calendar.WebService.Controllers.View
             }
             else
             {
+                var events = usersProvider.GetEventsAsync(id, hostId: null, hasAccepted: null);
+                user.Events = await events.ToListAsync();
+
                 ViewBag.Title = $"{user.DisplayName}'s profile";
                 return View(user);
             }
