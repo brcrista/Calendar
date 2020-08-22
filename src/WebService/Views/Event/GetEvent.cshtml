@@ -17,6 +17,12 @@
 <div>
   <h2>Attendees</h2>
   <ul>
-    <li><a href="../users/1.html">USER_DISPLAY_NAME</a></li>
+      @foreach (var user in
+          from guest in Model.Guests
+          where guest.HasAccepted && guest.User != null
+          select guest.User)
+      {
+          <li><a href="../users/@(user.Id)">@(user.DisplayName)</a></li>
+      }
   </ul>
 </div>

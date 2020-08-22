@@ -30,6 +30,7 @@
 /users/{user}/calendar**
 /users/{user}/contacts*
 /events/{event}*
+/events/{event}/guests*
 
 /api/v1/ *
 

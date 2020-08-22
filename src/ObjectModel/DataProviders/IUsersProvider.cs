@@ -9,8 +9,6 @@ namespace Calendar.ObjectModel.DataProviders
     {
         Task<User?> GetUserAsync(long id);
 
-        Task<IEnumerable<Event>> GetEventsAsync(int id, int? hostId, bool? hasAccepted);
-
-        Task<IEnumerable<User>> GetContactsAsync(long id);
+        IAsyncEnumerable<User> GetContactsAsync(long id);
     }
 }

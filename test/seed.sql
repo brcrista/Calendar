@@ -36,3 +36,17 @@ VALUES (1, 'Brian''s Party', '2020-08-31T00:00', '2020-08-31T04:00', '123 Main S
 
 INSERT INTO Events (id, title, start, end, location, description, owner_id)
 VALUES (2, 'Christmas UTC', '2020-12-25T00:00', '2020-12-25T23:59', NULL, 'The most wonderful time of the year', 1);
+
+-- Add attendees for events
+-- Everyone is invited to Brian's party, but only Caitie has accepted
+INSERT INTO UserEvents (user_id, event_id, accepted)
+VALUES (1, 1, 1);
+
+INSERT INTO UserEvents (user_id, event_id, accepted)
+VALUES (2, 1, 0);
+
+INSERT INTO UserEvents (user_id, event_id, accepted)
+VALUES (3, 1, 1);
+
+INSERT INTO UserEvents (user_id, event_id, accepted)
+VALUES (4, 1, 0);
