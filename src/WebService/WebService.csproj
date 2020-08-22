@@ -4,9 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Calendar.WebService</AssemblyName>
     <RootNamespace>Calendar.WebService</RootNamespace>
-    <Nullable>enable</Nullable>
-    <OutputPath>../../bin/</OutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
