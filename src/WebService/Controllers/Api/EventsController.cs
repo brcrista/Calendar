@@ -15,10 +15,12 @@ namespace Calendar.WebService.Controllers.Api
     public class EventsV1Controller : ControllerBase
     {
         private readonly IEventsProvider eventsProvider;
+        private readonly IUserEventsProvider userEventsProvider;
 
-        public EventsV1Controller(IEventsProvider eventsProvider)
+        public EventsV1Controller(IEventsProvider eventsProvider, IUserEventsProvider userEventsProvider)
         {
             this.eventsProvider = eventsProvider;
+            this.userEventsProvider = userEventsProvider;
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Calendar.WebService.Controllers.Api
         [HttpGet("guests")]
         public async Task<IActionResult> GetGuestsAsync(int id,  bool? hasAccepted)
         {
-            var guests = await eventsProvider.GetGuestsAsync(id, hasAccepted).ToArrayAsync();
+            var guests = await userEventsProvider.GetGuestsAsync(id, hasAccepted).ToArrayAsync();
             return Ok(guests);
         }
     }

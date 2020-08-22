@@ -12,10 +12,12 @@ namespace Calendar.WebService.Controllers.View
     public sealed class EventController : Controller
     {
         private readonly IEventsProvider eventsProvider;
+        private readonly IUserEventsProvider userEventsProvider;
 
-        public EventController(IEventsProvider eventsProvider)
+        public EventController(IEventsProvider eventsProvider, IUserEventsProvider userEventsProvider)
         {
             this.eventsProvider = eventsProvider;
+            this.userEventsProvider = userEventsProvider;
         }
 
         public async Task<IActionResult> GetEvent(long id)
@@ -27,7 +29,7 @@ namespace Calendar.WebService.Controllers.View
             }
             else
             {
-                var guests = eventsProvider.GetGuestsAsync(id, hasAccepted: null);
+                var guests = userEventsProvider.GetGuestsAsync(id, hasAccepted: null);
                 event_.Guests = await guests.ToListAsync();
 
                 ViewBag.Title = event_.Title;

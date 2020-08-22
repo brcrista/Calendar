@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -11,16 +10,13 @@ namespace Calendar.ObjectModel.DataProviders
     public sealed class SqliteEventsProvider : IEventsProvider
     {
         private readonly EventsTableAccess eventsTable;
-        private readonly UserEventsTableAccess userEventsTable;
         private readonly IUsersProvider usersProvider;
 
         public SqliteEventsProvider(
             EventsTableAccess eventsTable,
-            UserEventsTableAccess userEventsTable,
             IUsersProvider usersProvider)
         {
             this.eventsTable = eventsTable;
-            this.userEventsTable = userEventsTable;
             this.usersProvider = usersProvider;
         }
 
@@ -70,24 +66,6 @@ namespace Calendar.ObjectModel.DataProviders
                 Location = row.Location,
                 Owner = owner
             };
-        }
-
-        public async IAsyncEnumerable<Guest> GetGuestsAsync(long id, bool? hasAccepted)
-        {
-            await foreach (var userEventsRow in userEventsTable.GetByEventAsync(id))
-            {
-                var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
-                if (user == null)
-                {
-                    throw new DataConsistencyException($"The UserEvents table contains a user ID {userEventsRow.EventId}, but no such user exists in the Users table.");
-                }
-
-                yield return new Guest
-                {
-                    User = user,
-                    HasAccepted = Convert.ToBoolean(userEventsRow.Accepted)
-                };
-            }
         }
     }
 }

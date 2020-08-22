@@ -12,10 +12,12 @@ namespace Calendar.WebService.Controllers.View
     public sealed class UserController : Controller
     {
         private readonly IUsersProvider usersProvider;
+        private readonly IUserEventsProvider userEventsProvider;
 
-        public UserController(IUsersProvider usersProvider)
+        public UserController(IUsersProvider usersProvider, IUserEventsProvider userEventsProvider)
         {
             this.usersProvider = usersProvider;
+            this.userEventsProvider = userEventsProvider;
         }
 
         public async Task<IActionResult> GetUser(long id)
@@ -27,7 +29,7 @@ namespace Calendar.WebService.Controllers.View
             }
             else
             {
-                var events = usersProvider.GetEventsAsync(id, hostId: null, hasAccepted: null);
+                var events = userEventsProvider.GetEventsAsync(id, hostId: null, hasAccepted: null);
                 user.Events = await events.ToListAsync();
 
                 ViewBag.Title = $"{user.DisplayName}'s profile";

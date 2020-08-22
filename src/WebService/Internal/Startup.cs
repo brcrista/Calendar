@@ -53,6 +53,7 @@ namespace Calendar.WebService
                 .AddSingleton<UserEventsTableAccess>()
                 .AddSingleton<IUsersProvider, SqliteUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
+                .AddSingleton<IUserEventsProvider, SqliteUserEventsProvider>()
                 .AddControllersWithViews(options =>
                 {
                     options.SuppressAsyncSuffixInActionNames = false;

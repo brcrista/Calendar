@@ -10,17 +10,10 @@ namespace Calendar.ObjectModel.DataProviders
     public sealed class SqliteUsersProvider : IUsersProvider
     {
         private readonly UsersTableAccess usersTable;
-        private readonly UserEventsTableAccess userEventsTable;
-        private readonly IEventsProvider eventsProvider;
 
-        public SqliteUsersProvider(
-            UsersTableAccess usersTable,
-            UserEventsTableAccess userEventsTable,
-            IEventsProvider eventsProvider)
+        public SqliteUsersProvider(UsersTableAccess usersTable)
         {
             this.usersTable = usersTable;
-            this.userEventsTable = userEventsTable;
-            this.eventsProvider = eventsProvider;
         }
 
         public async Task<User?> GetUserAsync(long id)
@@ -42,21 +35,6 @@ namespace Calendar.ObjectModel.DataProviders
         {
             // TODO
             return AsyncEnumerable.Empty<User>();
-        }
-
-        public async IAsyncEnumerable<Event> GetEventsAsync(long id, long? hostId, bool? hasAccepted)
-        {
-            // TODO hostId and hasAccepted
-            await foreach (var userEventsRow in userEventsTable.GetByUserAsync(id))
-            {
-                var event_ = await eventsProvider.GetEventAsync(userEventsRow.EventId);
-                if (event_ == null)
-                {
-                    throw new DataConsistencyException($"The UserEvents table contains an event ID {userEventsRow.EventId}, but no such event exists in the Events table.");
-                }
-
-                yield return event_;
-            }
         }
     }
 }
