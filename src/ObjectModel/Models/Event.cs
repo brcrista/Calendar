@@ -19,6 +19,6 @@ namespace Calendar.ObjectModel.Models
 
         public User? Owner { get; set; }
 
-        public IReadOnlyList<Attendee> Attendees { get; set; } = new List<Attendee>();
+        public IList<Attendee> Attendees { get; set; } = new List<Attendee>();
     }
 }

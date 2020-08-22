@@ -50,6 +50,7 @@ namespace Calendar.WebService
                 .AddSingleton<AccountsTableAccess>()
                 .AddSingleton<UsersTableAccess>()
                 .AddSingleton<EventsTableAccess>()
+                .AddSingleton<UserEventsTableAccess>()
                 .AddSingleton<IUsersProvider, SqliteUsersProvider>()
                 .AddSingleton<IEventsProvider, SqliteEventsProvider>()
                 .AddControllersWithViews(options =>

@@ -10,11 +10,13 @@ namespace Calendar.ObjectModel.DataProviders
     public sealed class SqliteEventsProvider : IEventsProvider
     {
         private readonly EventsTableAccess eventsTable;
+        private readonly UserEventsTableAccess userEventsTable;
         private readonly IUsersProvider usersProvider;
 
-        public SqliteEventsProvider(EventsTableAccess eventsTable, IUsersProvider usersProvider)
+        public SqliteEventsProvider(EventsTableAccess eventsTable, UserEventsTableAccess userEventsTable, IUsersProvider usersProvider)
         {
             this.eventsTable = eventsTable;
+            this.userEventsTable = userEventsTable;
             this.usersProvider = usersProvider;
         }
 
@@ -68,6 +70,16 @@ namespace Calendar.ObjectModel.DataProviders
                     Location = row.Location,
                     Owner = owner
                 };
+
+                await foreach (var userEventsRow in userEventsTable.GetByEventAsync(result.Id))
+                {
+                    var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
+                    result.Attendees.Add(new Attendee
+                    {
+                        User = user,
+                        HasAccepted = Convert.ToBoolean(userEventsRow.Accepted)
+                    });
+                }
             }
 
             return result;
