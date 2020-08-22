@@ -19,5 +19,5 @@ To run:
 ```bash
 # Note: this must be your working directory for the app to find appsettings.json
 cd dist
-./Calendar.WebService.exe
+./Calendar.WebService
 ```

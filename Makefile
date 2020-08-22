@@ -28,7 +28,7 @@ seed: test/seed.sql $(DATABASE)
 test/functional/node_modules:
 	cd test/functional && npm install
 
-# Start the service first with `dotnet run --project src/WebService`
+# Start the service first
 .PHONY: functional-tests
 functional-tests: test/functional/node_modules
 	cd test/functional && npm test
