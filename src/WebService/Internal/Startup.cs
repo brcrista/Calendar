@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +32,14 @@ namespace Calendar.WebService
         /// </remarks>
         public void ConfigureServices(IServiceCollection services)
         {
-            var databaseFilepath = Path.Join(Directory.GetCurrentDirectory(), "calendar.db");
+            var databaseFilepath = Configuration["Data:DatabaseFile"];
 
             // Check for the database file early.
+            if (databaseFilepath == null)
+            {
+                throw new ArgumentNullException("No database file was given in the configuration.");
+            }
+
             if (!File.Exists(databaseFilepath))
             {
                 throw new FileNotFoundException($"Database file {databaseFilepath} does not exist.");
