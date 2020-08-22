@@ -14,7 +14,7 @@ namespace Calendar.WebService
     /// <summary>
     /// Exposes methods that get called on application startup.
     /// </summary>
-    public sealed class Startup
+    internal sealed class Startup
     {
         public Startup(IConfiguration configuration)
         {

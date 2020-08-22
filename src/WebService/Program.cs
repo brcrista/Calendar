@@ -14,7 +14,7 @@ namespace Calendar.WebService
                 .Run();
         }
 
-        public static void Configure(IWebHostBuilder webBuilder)
+        private static void Configure(IWebHostBuilder webBuilder)
         {
             webBuilder.UseStartup<Startup>();
         }
