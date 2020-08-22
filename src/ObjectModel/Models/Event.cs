@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Calendar.ObjectModel.Models
 {
@@ -17,5 +18,7 @@ namespace Calendar.ObjectModel.Models
         public string? Description { get; set; }
 
         public User? Owner { get; set; }
+
+        public IReadOnlyList<Attendee> Attendees { get; set; } = new List<Attendee>();
     }
 }
