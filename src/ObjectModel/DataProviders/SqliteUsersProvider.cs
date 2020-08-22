@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,29 +26,24 @@ namespace Calendar.ObjectModel.DataProviders
         public async Task<User?> GetUserAsync(long id)
         {
             var resultRows = usersTable.GetUsersAsync(id);
+            var row = await resultRows.AssertSingleRowAsync();
 
-            User? result = null;
-            await foreach (var row in resultRows)
+            var result = new User
             {
-                Debug.Assert(result == null, "Since `id` is a primary key, we should get at most one row back.");
+                Id = row.Id,
+                DisplayName = row.DisplayName,
+                AccountId = row.AccountId
+            };
 
-                result = new User
+            await foreach (var userEventsRow in userEventsTable.GetByUserAsync(result.Id))
+            {
+                var event_ = await eventsProvider.GetEventAsync(userEventsRow.EventId);
+                if (event_ == null)
                 {
-                    Id = row.Id,
-                    DisplayName = row.DisplayName,
-                    AccountId = row.AccountId
-                };
-
-                await foreach (var userEventsRow in userEventsTable.GetByUserAsync(result.Id))
-                {
-                    var event_ = await eventsProvider.GetEventAsync(userEventsRow.EventId);
-                    if (event_ == null)
-                    {
-                        throw new DataConsistencyException($"The UserEvents table contains an event ID {userEventsRow.EventId}, but no such event exists in the Events table.");
-                    }
-
-                    result.Events.Add(event_);
+                    throw new DataConsistencyException($"The UserEvents table contains an event ID {userEventsRow.EventId}, but no such event exists in the Events table.");
                 }
+
+                result.Events.Add(event_);
             }
 
             return result;

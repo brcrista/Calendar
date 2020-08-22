@@ -26,68 +26,63 @@ namespace Calendar.ObjectModel.DataProviders
         public async Task<Event?> GetEventAsync(long id)
         {
             var resultRows = eventsTable.GetEventsAsync(id);
+            var row = await resultRows.AssertSingleRowAsync();
 
-            Event? result = null;
-            await foreach (var row in resultRows)
+            DateTime? startTime;
+            if (DateTime.TryParse(row.Start, out DateTime parsedStartTime))
             {
-                Debug.Assert(result == null, "Since `id` is a primary key, we should get at most one row back.");
+                startTime = parsedStartTime;
+            }
+            else
+            {
+                Debug.Assert(false, $"Could not parse start time {row.Start}.");
+                startTime = null;
+            }
 
-                DateTime? startTime;
-                if (DateTime.TryParse(row.Start, out DateTime parsedStartTime))
+            DateTime? endTime;
+            if (DateTime.TryParse(row.End, out DateTime parsedEndTime))
+            {
+                endTime = parsedEndTime;
+            }
+            else
+            {
+                Debug.Assert(false, $"Could not parse end time {row.End}.");
+                endTime = null;
+            }
+
+            User? owner;
+            if (row.OwnerId != null)
+            {
+                owner = await usersProvider.GetUserAsync(row.OwnerId.Value);
+            }
+            else
+            {
+                owner = null;
+            }
+
+            var result = new Event
+            {
+                Id = row.Id,
+                Title = row.Title,
+                Start = startTime,
+                End = endTime,
+                Location = row.Location,
+                Owner = owner
+            };
+
+            await foreach (var userEventsRow in userEventsTable.GetByEventAsync(result.Id))
+            {
+                var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
+                if (user == null)
                 {
-                    startTime = parsedStartTime;
-                }
-                else
-                {
-                    Debug.Assert(false, $"Could not parse start time {row.Start}.");
-                    startTime = null;
+                    throw new DataConsistencyException($"The UserEvents table contains a user ID {userEventsRow.EventId}, but no such user exists in the Users table.");
                 }
 
-                DateTime? endTime;
-                if (DateTime.TryParse(row.End, out DateTime parsedEndTime))
+                result.Attendees.Add(new Attendee
                 {
-                    endTime = parsedEndTime;
-                }
-                else
-                {
-                    Debug.Assert(false, $"Could not parse end time {row.End}.");
-                    endTime = null;
-                }
-
-                User? owner;
-                if (row.OwnerId != null)
-                {
-                    owner = await usersProvider.GetUserAsync(row.OwnerId.Value);
-                }
-                else
-                {
-                    owner = null;
-                }
-
-                result = new Event
-                {
-                    Id = row.Id,
-                    Title = row.Title,
-                    Start = startTime,
-                    End = endTime,
-                    Location = row.Location,
-                    Owner = owner
-                };
-
-                await foreach (var userEventsRow in userEventsTable.GetByEventAsync(result.Id))
-                {
-                    var user = await usersProvider.GetUserAsync(userEventsRow.UserId);
-                    if (user == null)
-                    {
-                        throw new DataConsistencyException($"The UserEvents table contains a user ID {userEventsRow.EventId}, but no such user exists in the Users table.");
-                    }
-
-                    result.Attendees.Add(new Attendee
-                    {
-                        User = user,
-                        HasAccepted = Convert.ToBoolean(userEventsRow.Accepted)
-                    });
-                }
+                    User = user,
+                    HasAccepted = Convert.ToBoolean(userEventsRow.Accepted)
+                });
             }
 
             return result;
