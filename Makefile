@@ -5,10 +5,12 @@ DOTNET_CONFIGURATION := Debug
 all: build pack $(DATABASE) seed
 
 .PHONY: build
-build: bin/WebService/$(DOTNET_CONFIGURATION)
-
-bin/WebService/$(DOTNET_CONFIGURATION): src/Calendar.sln
+build: src/Calendar.sln
 	dotnet build $< --configuration $(DOTNET_CONFIGURATION)
+
+# Since this is just the directory, we need to build it every time.
+# Otherwise, Make won't know if any of the source files have been updated.
+bin/WebService/$(DOTNET_CONFIGURATION): build
 
 dist:
 	mkdir -p dist
