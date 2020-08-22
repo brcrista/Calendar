@@ -14,16 +14,10 @@ To build:
 make
 ```
 
-To run on macOS / Linux:
+To run:
 
 ```bash
-cd bin
+# Note: this must be your working directory for the app to find appsettings.json
+cd dist
 ./Calendar.WebService
-```
-
-To run on Windows:
-
-```powershell
-cd bin
-.\Calendar.WebService.exe
 ```

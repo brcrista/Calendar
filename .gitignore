@@ -1,7 +1,10 @@
+# Build output
+bin/
+dist/
+obj/
+
 # .NET
 .vs/
-bin/
-obj/
 *.user
 
 # JavaScript

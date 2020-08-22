@@ -1,19 +1,23 @@
-BIN := ./bin
-DATABASE := $(BIN)/calendar.db
+DATABASE := dist/calendar.db
 DOTNET_CONFIGURATION := Debug
 
 .PHONY: all
-all: build $(DATABASE) seed
+all: build pack $(DATABASE) seed
 
 .PHONY: build
-build: src/Calendar.sln
+build: bin/WebService/$(DOTNET_CONFIGURATION)
+
+bin/WebService/$(DOTNET_CONFIGURATION): src/Calendar.sln
 	dotnet build $< --configuration $(DOTNET_CONFIGURATION)
 
-# Normally, this should get created as a side effect of `make build`
-$(BIN):
-	mkdir -p $(BIN)
+dist:
+	mkdir -p dist
 
-$(DATABASE): src/DataAccess/Sql/tables.sql $(BIN)
+.PHONY: pack
+pack: bin/WebService/$(DOTNET_CONFIGURATION) | dist
+	cp -r $</* dist/
+
+$(DATABASE): src/DataAccess/Sql/tables.sql | dist
 	sqlite3 $@ < $<
 
 # Seed the database with data for testing.
@@ -24,12 +28,15 @@ seed: test/seed.sql $(DATABASE)
 test/functional/node_modules:
 	cd test/functional && npm install
 
-# Start the service first with `dotnet run --project src/WebService`
+# Start the service first
 .PHONY: functional-tests
 functional-tests: test/functional/node_modules
 	cd test/functional && npm test
 
+# There seems to be an issue here where the bin/ and obj/ directories
+# don't get removed on the first try.
+# Maybe MSBuild is locking them.
+# Rerunning `make clean` should fix it.
 .PHONY: clean
 clean:
-	dotnet clean src
-	rm -rf $(BIN)
+	rm -rf bin/ dist/ obj/
