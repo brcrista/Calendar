@@ -10,4 +10,5 @@
 - [ ] What's going on with the ports in all the dev deployment options?
     - Look at `dotnet run --project WebService` vs. running the `.exe` directly
 - [ ] Add "Environment" endpoint to make sure the right config is running
+- [ ] Make the project runnable from inside Visual Studio
 - [ ] Create an ASP.NET template repo
