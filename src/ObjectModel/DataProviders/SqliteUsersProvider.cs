@@ -20,6 +20,10 @@ namespace Calendar.ObjectModel.DataProviders
         {
             var resultRows = usersTable.GetUsersAsync(id);
             var row = await resultRows.AssertSingleRowAsync();
+            if (row is null)
+            {
+                return null;
+            }
 
             var result = new User
             {

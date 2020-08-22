@@ -24,6 +24,10 @@ namespace Calendar.ObjectModel.DataProviders
         {
             var resultRows = eventsTable.GetEventsAsync(id);
             var row = await resultRows.AssertSingleRowAsync();
+            if (row is null)
+            {
+                return null;
+            }
 
             DateTime? startTime;
             if (DateTime.TryParse(row.Start, out DateTime parsedStartTime))
