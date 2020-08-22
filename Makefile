@@ -1,19 +1,23 @@
-BIN := ./bin
-DATABASE := $(BIN)/calendar.db
+DATABASE := dist/calendar.db
 DOTNET_CONFIGURATION := Debug
 
 .PHONY: all
-all: build $(DATABASE) seed
+all: build pack $(DATABASE) seed
 
 .PHONY: build
-build: src/Calendar.sln
+build: bin/WebService/$(DOTNET_CONFIGURATION)
+
+bin/WebService/$(DOTNET_CONFIGURATION): src/Calendar.sln
 	dotnet build $< --configuration $(DOTNET_CONFIGURATION)
 
-# Normally, this should get created as a side effect of `make build`
-$(BIN):
-	mkdir -p $(BIN)
+dist:
+	mkdir -p dist
 
-$(DATABASE): src/DataAccess/Sql/tables.sql $(BIN)
+.PHONY: pack
+pack: bin/WebService/$(DOTNET_CONFIGURATION) | dist
+	cp -r $</* dist/
+
+$(DATABASE): src/DataAccess/Sql/tables.sql | dist
 	sqlite3 $@ < $<
 
 # Seed the database with data for testing.
@@ -31,5 +35,4 @@ functional-tests: test/functional/node_modules
 
 .PHONY: clean
 clean:
-	dotnet clean src
-	rm -rf $(BIN)
+	rm -rf bin/ dist/ obj/
