@@ -9,17 +9,17 @@ A ## B -- many-to-many
 ```
 
 ```sql
-TABLE User
+TABLE Users
   id PRIMARY KEY
   display_name TEXT
   account_id FOREIGN KEY -- User == Account
 
-TABLE Account
+TABLE Accounts
   id PRIMARY KEY
   email TEXT
   password TEXT
 
-TABLE Event
+TABLE Events
   id PRIMARY KEY
   title TEXT
   start DATETIME
@@ -34,7 +34,7 @@ TABLE Contacts
   user2_id FOREIGN KEY
 
 -- User ## Event
-TABLE UserEvent
+TABLE UserEvents
   user_id FOREIGN KEY
   event_id FOREIGN KEY
   accepted BOOLEAN?
